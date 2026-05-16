@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Core\Booking\Ports\Inbound\BookingUseCaseInterface::class,
             \App\Core\Booking\Application\Services\BookingService::class
         );
+        // Booking Module
         $this->app->bind(
             \App\Core\Booking\Ports\Outbound\BookingRepositoryInterface::class,
             \App\Infrastructure\Persistence\Eloquent\EloquentBookingRepository::class
