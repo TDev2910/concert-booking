@@ -10,7 +10,7 @@ class Booking extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'orders'; 
+    protected $table = 'orders';
 
     protected $fillable = [
         'order_code',

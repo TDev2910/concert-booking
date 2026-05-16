@@ -2,14 +2,14 @@
 
 namespace App\Core\Booking\Domain\DTOs;
 
-class BookingData
+readonly class BookingData
 {
     public function __construct(
-        public readonly string $userId,
-        public readonly string $concertId,
-        public readonly array $items, // array of ['category_id' => ..., 'quantity' => ...]
-        public readonly ?string $voucherCode = null,
-        public readonly ?string $idempotencyKey = null
+        public string $userId,
+        public string $concertId,
+        public array $items,
+        public ?string $voucherCode = null,
+        public ?string $idempotencyKey = null
     ) {}
 
     public static function fromRequest(array $data): self
