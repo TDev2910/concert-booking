@@ -2,7 +2,7 @@ name: Laravel CI
 
 on:
   push:
-    branches: ["main", "dev"] # Cập nhật: Theo dõi cả nhánh dev
+    branches: ["main", "dev"]
   pull_request:
     branches: ["main", "dev"]
 
@@ -16,10 +16,9 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: "8.2"
-          extensions: mbstring, bcmath, gd, zip, sqlite3 # Thêm sqlite3 cho chắc chắn
+          extensions: mbstring, bcmath, gd, zip, sqlite3
           tools: composer:v2
 
-      # --- TỐI ƯU 1: Thêm Cache cho Composer giúp chạy nhanh gấp đôi ---
       - name: Cache Composer packages
         id: composer-cache
         uses: actions/cache@v4
@@ -32,7 +31,6 @@ jobs:
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
-      # --- TỐI ƯU 2: Chỉ cài đặt nếu cache không tồn tại hoặc có thay đổi ---
       - name: Install Dependencies
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
@@ -69,4 +67,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build Docker Image
-        run: docker build . --file Dockerfile -t seoulcenter-check:latest
+        # Cập nhật đường dẫn Dockerfile đúng (docker/php/Dockerfile)
+        run: docker build . --file docker/php/Dockerfile -t concert-booking-check:latest
